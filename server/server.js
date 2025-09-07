@@ -3,6 +3,7 @@ const cors = require("cors")
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const morgan = require("morgan")
+const authRoutes = require("./routes/auth.js")
 dotenv.config();
 
 
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(cors({origin:"http://localhost:5173"}))
 app.use(morgan("dev"))
 
+app.use("/api/auth",authRoutes)
 
 app.get("/api",(req,res)=>{
     res.json({message:"Api is running"})
