@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const authRoutes = require("./routes/auth.js")
+const resumeRoutes = require("./routes/resume.js")
 dotenv.config();
 
 
@@ -14,6 +15,7 @@ app.use(cors({origin:"http://localhost:5173"}))
 app.use(morgan("dev"))
 
 app.use("/api/auth",authRoutes)
+app.use("/api/resume",resumeRoutes)
 
 app.get("/api",(req,res)=>{
     res.json({message:"Api is running"})
