@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
     const [name,setName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
+    const navigate = useNavigate()
     const handleSubmit = async(e) =>{
         e.preventDefault();
         try{
@@ -15,13 +17,15 @@ const Signup = () => {
                 headers : {"Content-type":"application/json"},
                 body : JSON.stringify({name,email,password})
             })
-
+            
             const data = await res.json()
+            
             if(!res.ok){
                 alert("Signup sfailed" || data.message)
             }
-
+            localStorage.setItem("token",data.token)
             alert("Signup successful")
+            navigate("/resumeform")
         }
         catch(err){
             console.error(err)

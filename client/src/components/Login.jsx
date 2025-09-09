@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-
+    const navigate = useNavigate()
     const handleSubmit = async(e) =>{
         e.preventDefault();
         try{
@@ -22,8 +23,9 @@ const Login = () => {
             else{
                 console.log(data)
                 alert("login successful")
+                localStorage.setItem("token",data.token)
             }
-            
+            navigate("/resumeform")
         }
         catch(err){
             console.error(err)
